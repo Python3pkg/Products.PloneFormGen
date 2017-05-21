@@ -45,10 +45,10 @@ registerDirectory(SKINS_DIR + '/PloneFormGen', GLOBALS)
 
 def initialize(context):
 
-    import content, validators, tools, widgets
+    from . import content, validators, tools, widgets
 
     # side-effect import
-    import patches
+    from . import patches
 
     # Add our tools
     utils.ToolInit('PloneFormGen Tool',
@@ -69,7 +69,7 @@ def initialize(context):
     content_types, constructors, ftis = process_types(
         listOfTypes,
         PROJECTNAME)
-    allTypes = zip(content_types, constructors)
+    allTypes = list(zip(content_types, constructors))
     for atype, constructor in allTypes:
         kind = "%s: %s" % (PROJECTNAME, atype.archetype_name)
         if atype.portal_type == 'FormCustomScriptAdapter':

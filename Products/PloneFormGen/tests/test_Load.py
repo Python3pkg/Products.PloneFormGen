@@ -4,7 +4,7 @@ try:
     haveFunkload = True
 except ImportError:
     haveFunkload = False
-    print "collective.funkload is unavailable. Ignoring load tests."
+    print("collective.funkload is unavailable. Ignoring load tests.")
 
 
 if haveFunkload:

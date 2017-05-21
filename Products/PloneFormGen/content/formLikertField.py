@@ -67,9 +67,9 @@ class FGLikertField(fieldsBase.BaseFormField):
             required=1,
             default=default_questions,
             widget=LinesWidget(
-                label=_(u'label_fglikert_questions', default=u'Questions'),
-                description = _(u'help_fglikert_questions',
-                    default=u"""List of questions; these will be the rows of the table."""),
+                label=_('label_fglikert_questions', default='Questions'),
+                description = _('help_fglikert_questions',
+                    default="""List of questions; these will be the rows of the table."""),
             ),
         ),
         LinesField('likertAnswers',
@@ -77,9 +77,9 @@ class FGLikertField(fieldsBase.BaseFormField):
             required=1,
             default=default_answers,
             widget=LinesWidget(
-                label=_(u'label_fglikert_answers', default=u'Answers'),
-                description = _(u'help_fglikert_answers',
-                default=u"""List of possible answers for each of the questions;
+                label=_('label_fglikert_answers', default='Answers'),
+                description = _('help_fglikert_answers',
+                default="""List of possible answers for each of the questions;
                     these will be the columns of the table."""),
             ),
         ),

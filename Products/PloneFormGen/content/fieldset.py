@@ -38,13 +38,13 @@ FieldsetFolderSchema = ATFolderSchema.copy() + Schema((
         required=0,
         searchable=0,
         default='1',
-        widget=BooleanWidget(label=_(u'label_showlegend_text', default=u'Show Title as Legend'),
-            description=_(u'help_showlegend_text', default=u''),
+        widget=BooleanWidget(label=_('label_showlegend_text', default='Show Title as Legend'),
+            description=_('help_showlegend_text', default=''),
             ),
         ),
     ))
 
-FieldsetFolderSchema['description'].widget.label = _(u'label_fieldsethelp_text', default=u'Fieldset Help')
+FieldsetFolderSchema['description'].widget.label = _('label_fieldsethelp_text', default='Fieldset Help')
 FieldsetFolderSchema['description'].widget.description = None
 FieldsetFolderSchema.moveField('description', after='useLegend')
 
@@ -157,7 +157,7 @@ class FieldsetFolder(ATFolder):
             )
 
         if value in badIds:
-            raise BadRequest, 'The id "%s" is reserved.' % value
+            raise BadRequest('The id "%s" is reserved.' % value)
 
         ATFolder.setId(self, value)
         self.fsStartField.__name__ = self.getId()

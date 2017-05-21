@@ -50,7 +50,7 @@ class FormGenTool(UniqueObject, SimpleItem):
 
         self.stringValidators = {}
         self.stringValidatorsDL = DisplayList()
-        self.stringValidatorsDL.add('vocabulary_none_text', u'None')
+        self.stringValidatorsDL.add('vocabulary_none_text', 'None')
 
         for kwa in config.stringValidators:
             id = kwa['id']

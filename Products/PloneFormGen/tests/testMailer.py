@@ -30,7 +30,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
     def LoadRequestForm(self, **kwargs):
         form = self.app.REQUEST.form
         form.clear()
-        for key in kwargs.keys():
+        for key in list(kwargs.keys()):
             form[key] = kwargs[key]
         return self.app.REQUEST
 

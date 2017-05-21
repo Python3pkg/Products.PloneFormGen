@@ -52,10 +52,10 @@ class FGStringField(BaseFormField):
         StringField('fgStringValidator',
             vocabulary='stringValidatorsDL',
             enforceVocabulary=1,
-            widget=SelectionWidget(label=_(u'label_fgstringvalidator_text',
-                                           default=u'Validator'),
-                description=_(u'help_fgstringvalidator_text',
-                  default=u"""Tests input against simple string patterns."""),
+            widget=SelectionWidget(label=_('label_fgstringvalidator_text',
+                                           default='Validator'),
+                description=_('help_fgstringvalidator_text',
+                  default="""Tests input against simple string patterns."""),
                 ),
         ),
     ))
@@ -169,9 +169,9 @@ class FGIntegerField(BaseFormField):
             required=1,
             default='0',
             widget=IntegerWidget(
-                label=_(u'label_minval_text',
-                        default=u"Minimum Acceptable Value"),
-                description=_(u'help_minval_text', default=u"""
+                label=_('label_minval_text',
+                        default="Minimum Acceptable Value"),
+                description=_('help_minval_text', default="""
             The form will not accept values less than the number you enter here.
                 """),
                 ),
@@ -181,8 +181,8 @@ class FGIntegerField(BaseFormField):
             required=1,
             default='10000',
             widget=IntegerWidget(
-                label=_(u'label_maxval_text', default=u"Maximum Acceptable Value"),
-                description=_(u'help_maxval_text', default=u"""
+                label=_('label_maxval_text', default="Maximum Acceptable Value"),
+                description=_('help_maxval_text', default="""
                     The form will not accept values greater than the number you enter here.
                 """),
                 ),
@@ -234,9 +234,9 @@ class FGFixedPointField(BaseFormField):
             required=0,
             default='0.0',
             widget=DecimalWidget(
-                label=_(u'label_minval_text',
-                        default=u"Minimum Acceptable Value"),
-                description=_(u'help_minval_text', default=u"""
+                label=_('label_minval_text',
+                        default="Minimum Acceptable Value"),
+                description=_('help_minval_text', default="""
             The form will not accept values less than the number you enter here.
                 """),
                 size=8,
@@ -247,8 +247,8 @@ class FGFixedPointField(BaseFormField):
             required=1,
             default='10000.0',
             widget=DecimalWidget(
-                label=_(u'label_maxval_text', default=u"Maximum Acceptable Value"),
-                description=_(u'help_maxval_text', default=u"""
+                label=_('label_maxval_text', default="Maximum Acceptable Value"),
+                description=_('help_maxval_text', default="""
                     The form will not accept values greater than the number you enter here.
                 """),
                 size=8,
@@ -264,8 +264,8 @@ class FGFixedPointField(BaseFormField):
     del schema['serverSide']
 
     # and, required has only limited use ...
-    schema['required'].widget.description = _(u"help_fprequired_text", default = \
-        u"""NOTE: For a fixed-point field, the required flag will not allow
+    schema['required'].widget.description = _("help_fprequired_text", default = \
+        """NOTE: For a fixed-point field, the required flag will not allow
            entry of a '0' value.
         """)
 
@@ -324,8 +324,8 @@ class FGBooleanField(BaseFormField):
             searchable=0,
             required=0,
             widget=BooleanWidget(
-                label=_(u'label_fgdefault_text', default=u'Default'),
-                description=_(u'help_fgdefault_text', default=u"The value the "
+                label=_('label_fgdefault_text', default='Default'),
+                description=_('help_fgdefault_text', default="The value the "
                     "field should contain when the form is first displayed."
                     "Note that this may be overridden dynamically."),
                 ),
@@ -333,8 +333,8 @@ class FGBooleanField(BaseFormField):
         StringField('fgBooleanValidator',
             vocabulary='boolVocabDL',
             enforceVocabulary=1,
-            widget=SelectionWidget(label=_(u'label_fgbooleanvalidator_text', default=u'Validator'),
-                description=_(u'help_fgbooleanvalidator_text', default=u"""Choose a validator to require a particular response."""),
+            widget=SelectionWidget(label=_('label_fgbooleanvalidator_text', default='Validator'),
+                description=_('help_fgbooleanvalidator_text', default="""Choose a validator to require a particular response."""),
                 ),
         ),
         StringField('fgBoolTrueString',
@@ -342,9 +342,9 @@ class FGBooleanField(BaseFormField):
             searchable=0,
             default='1',
             widget=StringWidget(
-                label=_(u'label_fgbooleantruestring_text', default=u"True Display String"),
-                description=_(u'help_fgbooleantruestring_text', default=\
-                    u"String to use in thanks page and mail when the field's "
+                label=_('label_fgbooleantruestring_text', default="True Display String"),
+                description=_('help_fgbooleantruestring_text', default=\
+                    "String to use in thanks page and mail when the field's "
                     "checkbox is checked."),
                 ),
             ),
@@ -353,13 +353,13 @@ class FGBooleanField(BaseFormField):
             searchable=0,
             default='0',
             widget=StringWidget(
-                label=_(u'label_fgbooleanfalsestring_text', default=u"False Display String"),
-                description=_(u'help_fgbooleanfalsestring_text', default=u"""String to use in thanks page and mail when the field's checkbox is unchecked."""),
+                label=_('label_fgbooleanfalsestring_text', default="False Display String"),
+                description=_('help_fgbooleanfalsestring_text', default="""String to use in thanks page and mail when the field's checkbox is unchecked."""),
                 ),
             ),
     ))
     schema['required'].widget.description = \
-        _(u'help_boolrequired_text', default=u"""NOTE: For a checkbox field, the required flag doesn't do anything beyond
+        _('help_boolrequired_text', default="""NOTE: For a checkbox field, the required flag doesn't do anything beyond
            putting a 'required' marker next to the label. If you wish to require a
            particular input, choose a validator below.
         """)
@@ -408,13 +408,13 @@ class FGBooleanField(BaseFormField):
 
         return DisplayList( (
             ('',
-                _(u'vocabulary_none_text', u'None')
+                _('vocabulary_none_text', 'None')
                 ),
             ('isChecked',
-                _(u'vocabulary_ischecked_text', u'Is checked')
+                _('vocabulary_ischecked_text', 'Is checked')
                 ),
             ('isUnchecked',
-                _(u'vocabulary_isnotchecked_text', u'Is not checked')
+                _('vocabulary_isnotchecked_text', 'Is not checked')
                 ),
             ) )
 
@@ -447,8 +447,8 @@ class FGDateField(BaseFormField):
             required=0,
             default=1,
             widget=BooleanWidget(
-                label=_(u'label_fgshowhm_text', default=u'Show Time Selection Options'),
-                description=_(u'help_fgshowhm_text', default=u''),
+                label=_('label_fgshowhm_text', default='Show Time Selection Options'),
+                description=_('help_fgshowhm_text', default=''),
                 ),
         ),
         IntegerField('fgStartingYear',
@@ -456,8 +456,8 @@ class FGDateField(BaseFormField):
             required=0,
             default='1999',
             widget=IntegerWidget(
-                label=_(u'label_fgstartingyear_text', default=u'Starting Year'),
-                description = _(u"help_fgstartingyear_text"),
+                label=_('label_fgstartingyear_text', default='Starting Year'),
+                description = _("help_fgstartingyear_text"),
                 ),
         ),
         IntegerField('fgEndingYear',
@@ -465,8 +465,8 @@ class FGDateField(BaseFormField):
             required=0,
             default=None,
             widget=IntegerWidget(
-                label=_(u'label_fgendingyear_text', default=u'Ending Year'),
-                description = _(u'help_fgendingyear_text', default=u"""The last year to offer in the year drop-down.
+                label=_('label_fgendingyear_text', default='Ending Year'),
+                description = _('help_fgendingyear_text', default="""The last year to offer in the year drop-down.
                  Leave this empty if you wish to instead use a number of future years."""),
                 ),
         ),
@@ -475,8 +475,8 @@ class FGDateField(BaseFormField):
             required=0,
             default='5',
             widget=IntegerWidget(
-                label=_(u'label_fgfutureyears_text', default=u'Future Years To Display'),
-                description = _(u'help_fgfutureyears_text', default=u"""The number of future years to offer in the year drop-down.
+                label=_('label_fgfutureyears_text', default='Future Years To Display'),
+                description = _('help_fgfutureyears_text', default="""The number of future years to offer in the year drop-down.
                  (This is only applicable if you have not specified an ending year.)"""),
                 ),
         ),
@@ -704,8 +704,8 @@ class FGSelectionField(BaseFormField):
             enforceVocabulary=1,
             vocabulary='formatVocabDL',
             widget=SelectionWidget(
-                label=_(u'label_fgformat_text', default=u'Presentation Widget'),
-                description=_(u'help_fgformat_text', default=u''),
+                label=_('label_fgformat_text', default='Presentation Widget'),
+                description=_('help_fgformat_text', default=''),
                 ),
         ),
     ))
@@ -754,13 +754,13 @@ class FGSelectionField(BaseFormField):
 
         return DisplayList( (
             ('flex',
-                    _(u'vocabulary_flex_text', u'Flexible (radio for short, select for longer)')
+                    _('vocabulary_flex_text', 'Flexible (radio for short, select for longer)')
                 ),
             ('select',
-                    _(u'vocabulary_selection_text', u'Selection list')
+                    _('vocabulary_selection_text', 'Selection list')
                 ),
             ('radio',
-                    _(u'vocabulary_radio_text', u'Radio buttons')
+                    _('vocabulary_radio_text', 'Radio buttons')
                 ),
         ) )
 
@@ -780,7 +780,7 @@ class FGSelectionField(BaseFormField):
         v = vocabulary.getValue(vu) or vu
 
         # v might be unicode or string.  We need string.
-        if isinstance(v, unicode):
+        if isinstance(v, str):
             v = v.encode(charset)
         return cgi.escape(v)
 
@@ -803,8 +803,8 @@ class FGMultiSelectField(BaseFormField):
             enforceVocabulary=1,
             vocabulary='formatVocabDL',
             widget=SelectionWidget(
-                label=_(u'label_fgmsformat_text', default=u'Presentation Widget'),
-                description=_(u'help_fgmsformat_text', default=u"""Useful for stopping spam"""),
+                label=_('label_fgmsformat_text', default='Presentation Widget'),
+                description=_('help_fgmsformat_text', default="""Useful for stopping spam"""),
                 ),
         ),
     ))
@@ -867,10 +867,10 @@ class FGMultiSelectField(BaseFormField):
 
         return DisplayList( (
             ('select',
-                    _(u'vocabulary_selection_text', u'Selection list')
+                    _('vocabulary_selection_text', 'Selection list')
                 ),
             ('checkbox',
-                    _(u'vocabulary_checkbox_text', u'Checkbox list')
+                    _('vocabulary_checkbox_text', 'Checkbox list')
                 )
             ) )
 
@@ -892,7 +892,7 @@ class FGMultiSelectField(BaseFormField):
                 ku = k.decode(charset)
                 v = vocabulary.getValue(ku) or ku
                 # v might be unicode or string.  We need string.
-                if isinstance(v, unicode):
+                if isinstance(v, str):
                     v = v.encode(charset)
                 result.append(v)
 
@@ -939,8 +939,8 @@ class FGTextField(BaseFormField):
             required=0,
             default=False,
             widget=BooleanWidget(
-                label=_(u'label_validate_link_spam_text', default=u"Reject Text with Links?"),
-                description=_(u'help_validate_link_spam_text', default=u"""Useful for stopping spam"""),
+                label=_('label_validate_link_spam_text', default="Reject Text with Links?"),
+                description=_('help_validate_link_spam_text', default="""Useful for stopping spam"""),
                 ),
             ),
         ))
@@ -1028,8 +1028,8 @@ class FGRichTextField(BaseFormField):
                 vocabulary='htmlValidatorsDL',
                 enforceVocabulary=1,
                 default='isTidyHtmlWithCleanup',
-                widget=SelectionWidget(label=_(u'label_fgstringvalidator_text', default=u'Validator'),
-                    description=_(u'help_fgrtvalidator_text', default=u"""Input tests using HTMLTidy (if installed)."""),
+                widget=SelectionWidget(label=_('label_fgstringvalidator_text', default='Validator'),
+                    description=_('help_fgrtvalidator_text', default="""Input tests using HTMLTidy (if installed)."""),
                     ),
                 ),
         ))
@@ -1075,13 +1075,13 @@ class FGRichTextField(BaseFormField):
 
         return DisplayList( (
             ('',
-                _(u'vocabulary_none_text', u'None')
+                _('vocabulary_none_text', 'None')
                 ),
             ('isTidyHtml',
-                _(u'vocabulary_istidyhtml_text', u'Is Tidy HTML (fails on errors and warnings)')
+                _('vocabulary_istidyhtml_text', 'Is Tidy HTML (fails on errors and warnings)')
                 ),
             ('isTidyHtmlWithCleanup',
-                _(u'vocabulary_istidyhtmlwithcleanup_text', u'Tidy HTML With Cleanup (fails on errors, cleans up rest)')
+                _('vocabulary_istidyhtmlwithcleanup_text', 'Tidy HTML With Cleanup (fails on errors, cleans up rest)')
                 ),
             ) )
 
@@ -1108,8 +1108,8 @@ class FGRichLabelField(BaseFormField):
             default_content_type = 'text/html',
             default_output_type = 'text/x-html-safe',
             allowable_content_types = zconf.ATDocument.allowed_content_types,
-            widget=TinyMCEWidget(label=_(u'label_fglabelbody_text', default=u'Label body'),
-                description=_(u'help_fglabelbody_text', default=u"""
+            widget=TinyMCEWidget(label=_('label_fglabelbody_text', default='Label body'),
+                description=_('help_fglabelbody_text', default="""
                     The text to display in the form.
                 """),
                 allow_file_upload = False,
@@ -1122,8 +1122,8 @@ class FGRichLabelField(BaseFormField):
             validators=('talesvalidator',),
             default='',
             write_permission=EDIT_TALES_PERMISSION,
-            widget=StringWidget(label=_(u'label_fgtdefault_text', default=u"Default Expression"),
-                description=_(u'help_fgtdefault_text', default=u"""
+            widget=StringWidget(label=_('label_fgtdefault_text', default="Default Expression"),
+                description=_('help_fgtdefault_text', default="""
                     A TALES expression that will be evaluated when the form is displayed
                     to get the field default value.
                     Leave empty if unneeded. Your expression should evaluate as a string.
@@ -1135,8 +1135,8 @@ class FGRichLabelField(BaseFormField):
             ),
         ))
 
-    schema['title'].widget.label = _(u'label_title', default=u"Title")
-    schema['title'].widget.description = _(u'help_notdisplayed_text', default=u"Not displayed on form.")
+    schema['title'].widget.label = _('label_title', default="Title")
+    schema['title'].widget.description = _('help_notdisplayed_text', default="Not displayed on form.")
     schema['description'].widget.visible = {'view':'invisible','edit':'invisible'}
 
     # Standard content type setup
@@ -1197,8 +1197,8 @@ class FGFileField(BaseFormField):
             required=0,
             default=0,
             widget=IntegerWidget(
-                label=_(u'label_filemaxmb_text', default=u'Maximum Upload Size (Megabytes)'),
-                description=_(u'help_filemaxmb_text', default=u"""Set to 0 for no limit."""),
+                label=_('label_filemaxmb_text', default='Maximum Upload Size (Megabytes)'),
+                description=_('help_filemaxmb_text', default="""Set to 0 for no limit."""),
                 ),
         ),
 
@@ -1333,8 +1333,8 @@ class FGFieldsetStart(BaseFormField):
     schema['serverSide'].widget.visible = noview
 
     schema['required'].default = True
-    schema['required'].widget.label = _(u'label_showlegend_text', default=u'Show Title as Legend')
-    schema['required'].widget.description=_(u'help_showlegend_text', default=u'')
+    schema['required'].widget.label = _('label_showlegend_text', default='Show Title as Legend')
+    schema['required'].widget.description=_('help_showlegend_text', default='')
 
     # Standard content type setup
     portal_type = meta_type = 'FieldsetStart'

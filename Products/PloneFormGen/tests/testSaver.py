@@ -78,7 +78,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.assertEqual( errors, {} )
 
         self.assertEqual(saver.itemsSaved(), 1)
-        row = iter(saver.getSavedFormInput()).next()
+        row = next(iter(saver.getSavedFormInput()))
         self.assertEqual(len(row), 3)
 
         request = FakeRequest(add_auth=True, method='POST', topic = 'test subject', replyto='test@test.org', comments='test comments')
@@ -178,7 +178,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         # save a row
         saver.setSavedFormInput('one,two,three')
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['one', 'two', 'three'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['one', 'two', 'three'])
 
         data = cd()
         setattr(data, 'item-0', 'four')
@@ -186,13 +186,13 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         setattr(data, 'item-2', 'six')
 
         # We should need an authenticator
-        self.assertRaises(zExceptions.Forbidden, saver.manage_saveData, *[saver._inputStorage.keys()[0], data])
+        self.assertRaises(zExceptions.Forbidden, saver.manage_saveData, *[list(saver._inputStorage.keys())[0], data])
 
         saver.REQUEST = FakeRequest(add_auth=True, method="POST")
-        saver.manage_saveData(saver._inputStorage.keys()[0], data)
+        saver.manage_saveData(list(saver._inputStorage.keys())[0], data)
 
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['four', 'five', 'six'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['four', 'five', 'six'])
 
     def testEditSavedFormInputWithAlternateDelimiter(self):
         """ test manage_saveData functionality when an alternate csv delimiter is used """
@@ -210,7 +210,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         # save a row
         saver.setSavedFormInput('one|two|three')
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['one', 'two', 'three'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['one', 'two', 'three'])
 
         data = cd()
         setattr(data, 'item-0', 'four')
@@ -218,9 +218,9 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         setattr(data, 'item-2', 'six')
 
         saver.REQUEST = FakeRequest(add_auth=True, method="POST")
-        saver.manage_saveData(saver._inputStorage.keys()[0], data)
+        saver.manage_saveData(list(saver._inputStorage.keys())[0], data)
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['four', 'five', 'six'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['four', 'five', 'six'])
 
     def testRetrieveDataSavedBeforeSwitchingDelimiter(self):
         """ test manage_saveData functionality when an alternate csv delimiter is used """
@@ -233,7 +233,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         # save a row
         saver.setSavedFormInput('one,two,three')
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['one', 'two', 'three'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['one', 'two', 'three'])
 
         # switch prefered delimiter
         pft = getToolByName(self.portal, 'formgen_tool')
@@ -242,7 +242,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
 
         # verify we can retrieve based on new delimiter
         self.assertEqual(saver.itemsSaved(), 1)
-        self.assertEqual(saver._inputStorage.values()[0], ['one', 'two', 'three'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['one', 'two', 'three'])
 
     def testDeleteSavedFormInput(self):
         """ test manage_deleteData functionality """
@@ -258,10 +258,10 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         saver._addDataRow( ['seven','eight','nine'] )
         self.assertEqual(saver.itemsSaved(), 3)
 
-        saver.manage_deleteData(saver._inputStorage.keys()[1])
+        saver.manage_deleteData(list(saver._inputStorage.keys())[1])
         self.assertEqual(saver.itemsSaved(), 2)
-        self.assertEqual(saver._inputStorage.values()[0], ['one', 'two', 'three'])
-        self.assertEqual(saver._inputStorage.values()[1], ['seven', 'eight', 'nine'])
+        self.assertEqual(list(saver._inputStorage.values())[0], ['one', 'two', 'three'])
+        self.assertEqual(list(saver._inputStorage.values())[1], ['seven', 'eight', 'nine'])
 
 
     def testSaverInputAsDictionaries(self):
@@ -285,7 +285,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.assertEqual(saver.itemsSaved(), 1)
 
         iad = saver.InputAsDictionaries()
-        row = iter(iad).next()
+        row = next(iter(iad))
         self.assertEqual(len(row), 3)
         self.assertEqual(row['topic'], 'test subject')
 
@@ -373,7 +373,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.assertEqual( errors, {} )
 
         self.assertEqual(saver.itemsSaved(), 1)
-        row = iter(saver.getSavedFormInput()).next()
+        row = next(iter(saver.getSavedFormInput()))
         self.assertEqual(len(row), 2)
         self.assertEqual(row[0], 'test subject')
         self.assertEqual(row[1], 'test comments')

@@ -19,7 +19,7 @@ class PFGAnalyticsPlugin(AnalyticsBaseTrackingPlugin):
         """
 
         if IPloneFormGenForm.providedBy(self.context):
-            if 'form_submit' in self.request.form.keys():
+            if 'form_submit' in list(self.request.form.keys()):
                 return 'error'
             return 'form'
         elif IPloneFormGenThanksPage.providedBy(self.context):

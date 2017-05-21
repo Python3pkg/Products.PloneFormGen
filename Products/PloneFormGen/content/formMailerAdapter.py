@@ -38,7 +38,7 @@ from Products.TemplateFields import ZPTField as ZPTField
 
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
-from ya_gpg import gpg
+from .ya_gpg import gpg
 
 from email import Encoders
 from email.Header import Header
@@ -67,9 +67,9 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_ADDRESSING_PERMISSION,
         read_permission=ModifyPortalContent,
         widget=StringWidget(
-            label=_(u'label_formmailer_recipient_fullname',
-                      default=u"Recipient's full name"),
-            description=_(u'help_formmailer_recipient_fullname', default=u"""
+            label=_('label_formmailer_recipient_fullname',
+                      default="Recipient's full name"),
+            description=_('help_formmailer_recipient_fullname', default="""
                 The full name of the recipient of the mailed form.
                 """),
             ),
@@ -82,10 +82,10 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         validators=('isEmail',),
         widget=StringWidget(
-            label=_(u'label_formmailer_recipient_email',
-                      default=u"Recipient's e-mail address"),
-            description=_(u'help_formmailer_recipient_email',
-                            default=u'The recipients e-mail address.'),
+            label=_('label_formmailer_recipient_email',
+                      default="Recipient's e-mail address"),
+            description=_('help_formmailer_recipient_email',
+                            default='The recipients e-mail address.'),
             ),
         ),
     StringField('to_field',
@@ -97,9 +97,9 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         vocabulary='fieldsDisplayList',
         widget=SelectionWidget(
-            label=_(u'label_formmailer_to_extract', default=u'Extract Recipient From'),
-            description=_(u'help_formmailer_to_extract',
-                default=u"""
+            label=_('label_formmailer_to_extract', default='Extract Recipient From'),
+            description=_('help_formmailer_to_extract',
+                default="""
                 Choose a form field from which you wish to extract
                 input for the To header. If you choose anything other
                 than "None", this will override the "Recipient's e-mail address"
@@ -116,10 +116,10 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_ADDRESSING_PERMISSION,
         read_permission=ModifyPortalContent,
         widget=LinesWidget(
-            label=_(u'label_formmailer_cc_recipients',
-                      default=u'CC Recipients'),
-            description=_(u'help_formmailer_cc_recipients',
-                    default=u'E-mail addresses which receive a carbon copy.'),
+            label=_('label_formmailer_cc_recipients',
+                      default='CC Recipients'),
+            description=_('help_formmailer_cc_recipients',
+                    default='E-mail addresses which receive a carbon copy.'),
             ),
         ),
     LinesField('bcc_recipients',
@@ -130,10 +130,10 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_ADDRESSING_PERMISSION,
         read_permission=ModifyPortalContent,
         widget=LinesWidget(
-            label=_(u'label_formmailer_bcc_recipients',
-                      default=u'BCC Recipients'),
-            description=_(u'help_formmailer_bcc_recipients',
-                default=u'E-mail addresses which receive a blind carbon copy.'),
+            label=_('label_formmailer_bcc_recipients',
+                      default='BCC Recipients'),
+            description=_('help_formmailer_bcc_recipients',
+                default='E-mail addresses which receive a blind carbon copy.'),
             ),
         ),
     StringField('replyto_field',
@@ -144,10 +144,10 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         write_permission=EDIT_ADVANCED_PERMISSION,
         widget=SelectionWidget(
-            label=_(u'label_formmailer_replyto_extract',
-                      default=u'Extract Reply-To From'),
-            description=_(u'help_formmailer_replyto_extract',
-                default=u"""
+            label=_('label_formmailer_replyto_extract',
+                      default='Extract Reply-To From'),
+            description=_('help_formmailer_replyto_extract',
+                default="""
                 Choose a form field from which you wish to extract
                 input for the Reply-To header. NOTE: You should
                 activate e-mail address verification for the designated
@@ -162,13 +162,13 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         default='Form Submission',
         read_permission=ModifyPortalContent,
         widget=StringWidget(
-            description=_(u'help_formmailer_subject',
-                default=u"""
+            description=_('help_formmailer_subject',
+                default="""
                 Subject line of message. This is used if you
                 do not specify a subject field or if the field
                 is empty.
                 """),
-            label=_(u'label_formmailer_subject', default=u'Subject'),
+            label=_('label_formmailer_subject', default='Subject'),
             ),
         ),
     StringField('subject_field',
@@ -179,10 +179,10 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_ADVANCED_PERMISSION,
         read_permission=ModifyPortalContent,
         widget=SelectionWidget(
-            label=_(u'label_formmailer_subject_extract',
-                      default=u'Extract Subject From'),
-            description=_(u'help_formmailer_subject_extract',
-            default=u"""
+            label=_('label_formmailer_subject_extract',
+                      default='Extract Subject From'),
+            description=_('help_formmailer_subject_extract',
+            default="""
                 Choose a form field from which you wish to extract
                 input for the mail subject line.
                 """),
@@ -196,9 +196,9 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         default_content_type='text/plain',
         allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(description=_(u'help_formmailer_body_pre',
-                      default=u'Text prepended to fields listed in mail-body'),
-          label=_(u'label_formmailer_body_pre', default=u'Body (prepended)'),
+        widget=TextAreaWidget(description=_('help_formmailer_body_pre',
+                      default='Text prepended to fields listed in mail-body'),
+          label=_('label_formmailer_body_pre', default='Body (prepended)'),
             ),
         ),
     TextField('body_post',
@@ -208,9 +208,9 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         default_content_type='text/plain',
         allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(description=_(u'help_formmailer_body_post',
-                      default=u'Text appended to fields listed in mail-body'),
-          label=_(u'label_formmailer_body_post', default=u'Body (appended)'),
+        widget=TextAreaWidget(description=_('help_formmailer_body_post',
+                      default='Text appended to fields listed in mail-body'),
+          label=_('label_formmailer_body_post', default='Body (appended)'),
             ),
         ),
 
@@ -221,11 +221,11 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         read_permission=ModifyPortalContent,
         default_content_type='text/plain',
         allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(description=_(u'help_formmailer_body_footer',
-                          default=u'Text used as the footer at '
-                          u'bottom, delimited from the body by a dashed line.'),
-            label=_(u'label_formmailer_body_footer',
-                      default=u'Body (signature)'),
+        widget=TextAreaWidget(description=_('help_formmailer_body_footer',
+                          default='Text used as the footer at '
+                          'bottom, delimited from the body by a dashed line.'),
+            label=_('label_formmailer_body_footer',
+                      default='Body (signature)'),
             ),
         ),
     BooleanField('showAll',
@@ -235,8 +235,8 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         default='1',
         read_permission=ModifyPortalContent,
         widget=BooleanWidget(
-            label=_(u'label_mailallfields_text', default=u"Include All Fields"),
-            description=_(u'help_mailallfields_text', default=u"""
+            label=_('label_mailallfields_text', default="Include All Fields"),
+            description=_('help_mailallfields_text', default="""
                 Check this to include input for all fields
                 (except label and file fields). If you check
                 this, the choices in the pick box below
@@ -251,8 +251,8 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         vocabulary='allFieldDisplayList',
         read_permission=ModifyPortalContent,
         widget=PicklistWidget(
-            label=_(u'label_mailfields_text', default=u"Show Responses"),
-            description=_(u'help_mailfields_text', default=u"""
+            label=_('label_mailfields_text', default="Show Responses"),
+            description=_('help_mailfields_text', default="""
                 Pick the fields whose inputs you'd like to include in
                 the e-mail.
                 """),
@@ -265,8 +265,8 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         default='1',
         read_permission=ModifyPortalContent,
         widget=BooleanWidget(
-            label=_(u'label_mailEmpties_text', default=u"Include Empties"),
-            description=_(u'help_mailEmpties_text', default=u"""
+            label=_('label_mailEmpties_text', default="Include Empties"),
+            description=_('help_mailEmpties_text', default="""
                 Check this to include titles
                 for fields that received no input. Uncheck
                 to leave fields with no input out of the e-mail.
@@ -278,12 +278,12 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         default_method='getMailBodyDefault',
         read_permission=ModifyPortalContent,
-        widget=TextAreaWidget(description=_(u'help_formmailer_body_pt',
-            default=u"""This is a Zope Page Template
+        widget=TextAreaWidget(description=_('help_formmailer_body_pt',
+            default="""This is a Zope Page Template
             used for rendering of the mail-body. You don\'t need to modify
             it, but if you know TAL (Zope\'s Template Attribute Language)
             you have the full power to customize your outgoing mails."""),
-            label=_(u'label_formmailer_body_pt', default=u'Mail-Body Template'),
+            label=_('label_formmailer_body_pt', default='Mail-Body Template'),
             rows=20,
             visible={'edit': 'visible', 'view': 'invisible'},
             ),
@@ -295,11 +295,11 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         vocabulary=MIME_LIST,
         write_permission=EDIT_ADVANCED_PERMISSION,
         read_permission=ModifyPortalContent,
-        widget=SelectionWidget(description=_(u'help_formmailer_body_type',
-            default=u"""Set the mime-type of the mail-body.
+        widget=SelectionWidget(description=_('help_formmailer_body_type',
+            default="""Set the mime-type of the mail-body.
             Change this setting only if you know exactly what you are doing.
             Leave it blank for default behaviour."""),
-            label = _(u'label_formmailer_body_type', default=u'Mail Format'),
+            label = _('label_formmailer_body_type', default='Mail Format'),
             ),
         ),
     LinesField('xinfo_headers',
@@ -317,8 +317,8 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
             ('HTTP_REFERER', 'HTTP_REFERER'),
             ), ),
         widget=MultiSelectionWidget(
-            label=_(u'label_xinfo_headers_text', default=u'HTTP Headers'),
-            description=_(u'help_xinfo_headers_text', default=u"""
+            label=_('label_xinfo_headers_text', default='HTTP Headers'),
+            description=_('help_xinfo_headers_text', default="""
                 Pick any items from the HTTP headers that
                 you'd like to insert as X- headers in the
                 message.
@@ -334,8 +334,8 @@ formMailerAdapterSchema = FormAdapterSchema.copy() + Schema((
         write_permission=EDIT_ADVANCED_PERMISSION,
         read_permission=ModifyPortalContent,
         widget=LinesWidget(
-            label=_(u'label_formmailer_additional_headers', default=u'Additional Headers'),
-            description=_(u'help_formmailer_additional_headers', default=u"""
+            label=_('label_formmailer_additional_headers', default='Additional Headers'),
+            description=_('help_formmailer_additional_headers', default="""
                 Additional e-mail-header lines.
                 Only use RFC822-compliant headers.
                 """),
@@ -352,7 +352,7 @@ if gpg is not None:
             write_permission=USE_ENCRYPTION_PERMISSION,
             read_permission=ModifyPortalContent,
             widget=StringWidget(
-                description=_(u'help_gpg_key_id', default=u"""
+                description=_('help_gpg_key_id', default="""
                     Give your key-id, e-mail address or
                     whatever works to match a public key from current keyring.
                     It will be used to encrypt the message body (not attachments).
@@ -362,7 +362,7 @@ if gpg is not None:
                     template to plain text if you're using encryption.
                     TEST THIS FEATURE BEFORE GOING PUBLIC!
                     """),
-                label=_(u'label_gpg_key_id', default=u'Key-Id'),
+                label=_('label_gpg_key_id', default='Key-Id'),
                 ),
             ),
         ))
@@ -378,8 +378,8 @@ formMailerAdapterSchema = formMailerAdapterSchema + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True,  # just to hide from base view
-        widget=StringWidget(label=_(u'label_subject_override_text', default=u"Subject Expression"),
-            description=_(u'help_subject_override_text', default=u"""
+        widget=StringWidget(label=_('label_subject_override_text', default="Subject Expression"),
+            description=_('help_subject_override_text', default="""
                 A TALES expression that will be evaluated to override any value
                 otherwise entered for the e-mail subject header.
                 Leave empty if unneeded. Your expression should evaluate as a string.
@@ -398,9 +398,9 @@ formMailerAdapterSchema = formMailerAdapterSchema + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True,  # just to hide from base view
-        widget=StringWidget(label=_(u'label_sender_override_text',
-                                    default=u"Sender Expression"),
-            description=_(u'help_sender_override_text', default=u"""
+        widget=StringWidget(label=_('label_sender_override_text',
+                                    default="Sender Expression"),
+            description=_('help_sender_override_text', default="""
                 A TALES expression that will be evaluated to override the "From" header.
                 Leave empty if unneeded. Your expression should evaluate as a string.
                 PLEASE NOTE: errors in the evaluation of this expression will cause
@@ -418,8 +418,8 @@ formMailerAdapterSchema = formMailerAdapterSchema + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True,  # just to hide from base view
-        widget=StringWidget(label=_(u'label_recipient_override_text', default=u"Recipient Expression"),
-            description=_(u'help_recipient_override_text', default=u"""
+        widget=StringWidget(label=_('label_recipient_override_text', default="Recipient Expression"),
+            description=_('help_recipient_override_text', default="""
                 A TALES expression that will be evaluated to override any value
                 otherwise entered for the recipient e-mail address. You are strongly
                 cautioned against using unvalidated data from the request for this purpose.
@@ -439,8 +439,8 @@ formMailerAdapterSchema = formMailerAdapterSchema + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True, # just to hide from base view
-        widget=StringWidget(label=_(u'label_cc_override_text', default=u"CC Expression"),
-            description=_(u'help_cc_override_text', default=u"""
+        widget=StringWidget(label=_('label_cc_override_text', default="CC Expression"),
+            description=_('help_cc_override_text', default="""
                 A TALES expression that will be evaluated to override any value
                 otherwise entered for the CC list. You are strongly
                 cautioned against using unvalidated data from the request for this purpose.
@@ -460,8 +460,8 @@ formMailerAdapterSchema = formMailerAdapterSchema + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True,  # just to hide from base view
-        widget=StringWidget(label=_(u'label_bcc_override_text', default=u"BCC Expression"),
-            description=_(u'help_bcc_override_text', default=u"""
+        widget=StringWidget(label=_('label_bcc_override_text', default="BCC Expression"),
+            description=_('help_bcc_override_text', default="""
                 A TALES expression that will be evaluated to override any value
                 otherwise entered for the BCC list. You are strongly
                 cautioned against using unvalidated data from the request for this purpose.
@@ -515,7 +515,7 @@ class FormMailerAdapter(FormActionAdapter):
 
         FormActionAdapter.initializeArchetype(self, **kwargs)
 
-        self.setMsg_subject(zope.i18n.translate(_(u'pfg_formmaileradapter_msg_subject', u'Form Submission'), context=self.REQUEST))
+        self.setMsg_subject(zope.i18n.translate(_('pfg_formmaileradapter_msg_subject', 'Form Submission'), context=self.REQUEST))
 
     security.declarePrivate('onSuccess')
 
@@ -637,8 +637,8 @@ class FormMailerAdapter(FormActionAdapter):
         (headerinfo, additional_headers,
          body) = self.get_header_body_tuple(fields, request, **kwargs)
 
-        if not isinstance(body, unicode):
-            body = unicode(body, self._site_encoding())
+        if not isinstance(body, str):
+            body = str(body, self._site_encoding())
         registry = getUtility(IRegistry)
         email_charset = registry['plone.email_charset'] or 'utf-8'
         # always use text/plain for encrypted bodies
@@ -655,7 +655,7 @@ class FormMailerAdapter(FormActionAdapter):
             outer = mime_text
 
         # write header
-        for key, value in headerinfo.items():
+        for key, value in list(headerinfo.items()):
             outer[key] = value
 
         # write additional header
@@ -768,7 +768,7 @@ class FormMailerAdapter(FormActionAdapter):
         # full fields to enable access to htmlValue
         body = bodyfield.get(self, fields=bare_fields, wrappedFields=live_fields, **kwargs)
 
-        if isinstance(body, unicode):
+        if isinstance(body, str):
             body = body.encode(self.getCharset())
 
         try:
@@ -913,23 +913,23 @@ class FormMailerAdapter(FormActionAdapter):
         # transform subject into mail header encoded string
         email_charset = registry['plone.email_charset'] or 'utf-8'
 
-        if not isinstance(subject, unicode):
+        if not isinstance(subject, str):
             site_charset = 'utf-8'
-            subject = unicode(subject, site_charset, 'replace')
+            subject = str(subject, site_charset, 'replace')
 
         msgSubject = self.secure_header_line(subject).encode(email_charset, 'replace')
         msgSubject = str(Header(msgSubject, email_charset))
         headerinfo['Subject'] = msgSubject
 
         # CC
-        cc_recips = filter(None, self.cc_recipients)
+        cc_recips = [_f for _f in self.cc_recipients if _f]
         if shasattr(self, 'ccOverride') and self.getRawCcOverride():
             cc_recips = self.getCcOverride()
         if cc_recips:
             headerinfo['Cc'] = self._destFormat(cc_recips)
 
         # BCC
-        bcc_recips = filter(None, self.bcc_recipients)
+        bcc_recips = [_f for _f in self.bcc_recipients if _f]
         if shasattr(self, 'bccOverride') and self.getRawBccOverride():
             bcc_recips = self.getBccOverride()
         if bcc_recips:

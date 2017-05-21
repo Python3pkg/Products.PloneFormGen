@@ -34,8 +34,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
         searchable=0,
         default='1',
         widget=BooleanWidget(
-            label=_(u'label_showallfields_text', default=u"Show All Fields"),
-            description=_(u'help_showallfields_text', default=u"""
+            label=_('label_showallfields_text', default="Show All Fields"),
+            description=_('help_showallfields_text', default="""
                 Check this to display input for all fields
                 (except label and file fields). If you check
                 this, the choices in the pick box below
@@ -48,8 +48,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
         searchable=0,
         vocabulary='fieldDisplayList',
         widget=PicklistWidget(
-            label=_(u'label_showfields_text', default=u"Show Responses"),
-            description=_(u'help_showfields_text', default=u"""
+            label=_('label_showfields_text', default="Show Responses"),
+            description=_('help_showfields_text', default="""
                 Pick the fields whose inputs you'd like to display on
                 the success page.
                 """),
@@ -60,8 +60,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
         searchable=0,
         default='1',
         widget=BooleanWidget(
-            label=_(u'label_includeEmpties_text', default=u"Include Empties"),
-            description=_(u'help_includeEmpties_text', default=u"""
+            label=_('label_includeEmpties_text', default="Include Empties"),
+            description=_('help_includeEmpties_text', default="""
                 Check this to display field titles
                 for fields that received no input. Uncheck
                 to leave fields with no input off the list.
@@ -79,8 +79,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
         default_output_type='text/x-html-safe',
         allowable_content_types=zconf.ATDocument.allowed_content_types,
         widget=TinyMCEWidget(
-            label=_(u"label_thanksprologue_text", default=u"Thanks Prologue"),
-            description=_(u"help_thanksprologue_text", default=u"This text will be displayed above the selected field inputs."),
+            label=_("label_thanksprologue_text", default="Thanks Prologue"),
+            description=_("help_thanksprologue_text", default="This text will be displayed above the selected field inputs."),
             rows=8,
             allow_file_upload=zconf.ATDocument.allow_document_upload,
             ),
@@ -96,8 +96,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
         default_output_type='text/x-html-safe',
         allowable_content_types=zconf.ATDocument.allowed_content_types,
         widget=TinyMCEWidget(
-            label=_(u"label_thanksepilogue_text", default=u"Thanks Epilogue"),
-            description=_(u"help_thanksepilogue_text", default=u"The text will be displayed after the field inputs."),
+            label=_("label_thanksepilogue_text", default="Thanks Epilogue"),
+            description=_("help_thanksepilogue_text", default="The text will be displayed after the field inputs."),
             rows=8,
             allow_file_upload=zconf.ATDocument.allow_document_upload,
             ),
@@ -115,8 +115,8 @@ ThanksPageSchema = ATContentTypeSchema.copy() + Schema((
             """,
         allowable_content_types=zconf.ATDocument.allowed_content_types,
         widget=TinyMCEWidget(
-            label=_(u"label_nosubmit_text", default=u"No Submit Message"),
-            description=_(u"help_nosubmit_text", default=u"""
+            label=_("label_nosubmit_text", default="No Submit Message"),
+            description=_("help_nosubmit_text", default="""
                 The text to display if the browser reaches this
                 thanks page without submitting a form. Typically, this
                 would direct the reader to the form.
@@ -196,7 +196,7 @@ class FormThanksPage(ATCTContent):
 
         ATCTContent.initializeArchetype(self, **kwargs)
 
-        self.setNoSubmitMessage(zope.i18n.translate(_(u'pfg_thankspage_nosubmitmessage', u'<p>No input was received. Please visit the form.</p>'), context=self.REQUEST))
+        self.setNoSubmitMessage(zope.i18n.translate(_('pfg_thankspage_nosubmitmessage', '<p>No input was received. Please visit the form.</p>'), context=self.REQUEST))
 
     security.declareProtected(View, 'fieldDisplayList')
     def fieldDisplayList(self):

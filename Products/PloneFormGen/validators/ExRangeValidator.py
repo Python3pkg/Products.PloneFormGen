@@ -25,7 +25,7 @@ class ExRangeValidator:
         field    = kwargs.get('field', None)
 
         # get maxval
-        if kwargs.has_key('maxval'):
+        if 'maxval' in kwargs:
             maxval = kwargs.get('maxval')
         elif hasattr(field, 'maxval'):
             maxval = float(field.maxval)
@@ -34,7 +34,7 @@ class ExRangeValidator:
             maxval = self.maxval
 
         # get minval
-        if kwargs.has_key('minval'):
+        if 'minval' in kwargs:
             minval = kwargs.get('minval')
         elif hasattr(field, 'minval'):
             minval = float(field.minval)

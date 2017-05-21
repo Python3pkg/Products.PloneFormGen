@@ -53,8 +53,8 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         res = self.ff1.fgFieldsDisplayList()
 
         self.assertEqual(len(res), 3)
-        self.assertEqual( res.keys()[0], 'replyto' )
-        self.failUnless( isinstance(res.values()[0], unicode) )
+        self.assertEqual( list(res.keys())[0], 'replyto' )
+        self.failUnless( isinstance(list(res.values())[0], str) )
 
 
     def testFgFieldsDisplayListFieldset(self):
@@ -124,7 +124,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.ff1.topic.setTitle('Effacer les entr\xc3\xa9es sauvegard\xc3\xa9es')
         request = self.fakeRequest()
         errors = self.ff1.topic.fgvalidate(request)
-        self.failUnless( errors.has_key('topic') )
+        self.failUnless( 'topic' in errors )
 
 
     def test_CustomValidation(self):
@@ -172,7 +172,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.assertEqual( self.ff1['topic'].htmlValue(request), 'test \xc3\x91 subject')
 
         # check unicode
-        request = self.fakeRequest(topic = u'test \xd1 subject')
+        request = self.fakeRequest(topic = 'test \xd1 subject')
         self.assertEqual( self.ff1['topic'].htmlValue(request), 'test \xc3\x91 subject')
 
         # test html escaping
@@ -184,7 +184,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.assertEqual( self.ff1['topic'].htmlValue(request), "'one'")
 
         # test list cleanup with mixed values
-        request = self.fakeRequest(topic = ['test \xc3\x91 subject', u'test \xd1 subject', 1])
+        request = self.fakeRequest(topic = ['test \xc3\x91 subject', 'test \xd1 subject', 1])
         self.assertEqual( self.ff1['topic'].htmlValue(request), "'test \\xc3\\x91 subject', 'test \\xc3\\x91 subject', 1")
 
         # test non-list non-cleanup
@@ -202,7 +202,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.ff1.invokeFactory('FormSelectionField', 'fsf')
         # Let's mix ascii and non-ascii strings and unicode.
         self.ff1.fsf.fgVocabulary = (
-            '1|one', '2|two', '3|three', u'4|fo\xfcr', '5|f\xc3\xacve')
+            '1|one', '2|two', '3|three', '4|fo\xfcr', '5|f\xc3\xacve')
 
         # first test inside the vocabulary
         request = self.fakeRequest(fsf = '2')
@@ -223,7 +223,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         # Now test unicode
         request = self.fakeRequest(fsf = '4')
         val = self.ff1['fsf'].htmlValue(request)
-        self.assertEqual(val, u'fo\xfcr'.encode('utf-8'))
+        self.assertEqual(val, 'fo\xfcr'.encode('utf-8'))
 
         # And test a non-ascii string
         request = self.fakeRequest(fsf = '5')
@@ -236,7 +236,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         self.ff1.invokeFactory('FormMultiSelectionField', 'fsf')
         # Let's mix ascii and non-ascii strings and unicode.
         self.ff1.fsf.fgVocabulary = (
-            '1|one', '2|two', '3|three', u'4|fo\xfcr', '5|f\xc3\xacve')
+            '1|one', '2|two', '3|three', '4|fo\xfcr', '5|f\xc3\xacve')
 
         # first test inside the vocabulary
         request = self.fakeRequest(fsf = ['2', '3', ''])
@@ -263,7 +263,7 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         request = self.fakeRequest(fsf = ['1', '4', '5'])
         val = self.ff1['fsf'].htmlValue(request)
         self.assertEqual(val, 'one, fo\xc3\xbcr, f\xc3\xacve')
-        self.assertEqual(val.decode('utf-8'), u'one, fo\xfcr, f\xecve')
+        self.assertEqual(val.decode('utf-8'), 'one, fo\xfcr, f\xecve')
 
     def testHtmlValueDateField(self):
         """ Test field htmlValue method of date field """
@@ -472,10 +472,10 @@ class TestFunctions(pfgtc.PloneFormGenTestCase):
         # test with:
         # msgid "clear-save-input"
 
-        msg = _(u"clear-save-input", u"Clear Saved Input")
+        msg = _("clear-save-input", "Clear Saved Input")
 
         xlation = translate(msg, target_language='en')
-        self.assertEqual( xlation, u"Clear Saved Input" )
+        self.assertEqual( xlation, "Clear Saved Input" )
 
         # xlation = translate(msg, target_language='fr')
         # self.assertEqual( xlation, 'Effacer les entr\xc3\xa9es sauvegard\xc3\xa9es'.decode('utf-8') )

@@ -69,7 +69,7 @@ class LikertField(ObjectField):
     def set(self, instance, value, **kwargs):
         """ Set the LikertField data """
 
-        if type(value) in (str, unicode):
+        if type(value) in (str, str):
             value = [v.strip() for v in value.split(',')]
         ObjectField.set(self, instance, value, **kwargs)
 
@@ -92,7 +92,7 @@ class LikertField(ObjectField):
         return None
 
     def validate(self, value, instance, errors=None, **kwargs):
-        error = _(u'pfg_allRequired', u'An answer is required for each question.')
+        error = _('pfg_allRequired', 'An answer is required for each question.')
         if not self.required:
             return None
         for index in range(len(self.questionSet)):

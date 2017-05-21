@@ -39,7 +39,7 @@ from Products.PloneFormGen.interfaces import IPloneFormGenField
 
 from Products.PloneFormGen import PloneFormGenMessageFactory as _
 
-import field_utils
+from . import field_utils
 
 
 def finalizeFieldSchema(schema, folderish=True, moveDiscussion=False):
@@ -75,9 +75,9 @@ validatorOverrideField = \
             validators=('talesvalidator',),
             default="python:False",
             write_permission=EDIT_TALES_PERMISSION,
-            widget=StringWidget(label=_(u'label_fgtvalidator_text', default=u"Custom Validator"),
-                description=_(u'help_fgtvalidator_text', default=\
-                    u"A TALES expression that will be evaluated when the form is validated."
+            widget=StringWidget(label=_('label_fgtvalidator_text', default="Custom Validator"),
+                description=_('help_fgtvalidator_text', default=\
+                    "A TALES expression that will be evaluated when the form is validated."
                     "Validate against 'value', which will contain the field input."
                     "Return False if valid; if not valid return a string error message."
                     "E.G., \"python: test(value=='eggs', False, 'input must be eggs')\" will"
@@ -93,8 +93,8 @@ rowsField = \
         searchable=0,
         required=0,
         default='5',
-        widget=IntegerWidget(label=_(u'label_rows_text', default=u'Rows'),
-            description=_(u'help_rows_text', default=u''),
+        widget=IntegerWidget(label=_('label_rows_text', default='Rows'),
+            description=_('help_rows_text', default=''),
             ),
         )
 
@@ -102,8 +102,8 @@ maxlengthField = \
     IntegerField('fgmaxlength',
         default=255,
         widget=IntegerWidget(
-            label=_(u'label_fgmaxlength_text', default=u'Max Length'),
-            description=_(u'help_fgmaxlength_text', default=u"The maximum "
+            label=_('label_fgmaxlength_text', default='Max Length'),
+            description=_('help_fgmaxlength_text', default="The maximum "
                 "number of characters the user will be able to input."
                 "Use 0 for no limit."),
             ),
@@ -113,8 +113,8 @@ maxlengthField0 = \
         IntegerField('fgmaxlength',
             default=0,
             widget=IntegerWidget(
-                label=_(u'label_fgmaxlength_text', default=u'Max Length'),
-                description=_(u'help_fgmaxlength_text', default=u"The maximum "
+                label=_('label_fgmaxlength_text', default='Max Length'),
+                description=_('help_fgmaxlength_text', default="The maximum "
                     "number of characters the user will be able to input."
                     "Use 0 for no limit."),
                 ),
@@ -124,8 +124,8 @@ maxlengthField4k = \
         IntegerField('fgmaxlength',
             default='4096',
             widget=IntegerWidget(
-                label=_(u'label_fgmaxlength_text', default=u'Max Length'),
-                description=_(u'help_fgmaxlength_text', default=u"The maximum "
+                label=_('label_fgmaxlength_text', default='Max Length'),
+                description=_('help_fgmaxlength_text', default="The maximum "
                     "number of characters the user will be able to input."
                     "Use 0 for no limit."),
                 ),
@@ -135,8 +135,8 @@ sizeField = \
     IntegerField('fgsize',
         default=30,
         widget=IntegerWidget(
-            label=_(u'label_fgsize_text', default=u'Size'),
-            description=_(u'help_fgsize_text', default=u'The size of the text-entry box, in characters.'),
+            label=_('label_fgsize_text', default='Size'),
+            description=_('help_fgsize_text', default='The size of the text-entry box, in characters.'),
             ),
         )
 
@@ -144,9 +144,9 @@ vocabularyField = \
     LinesField('fgVocabulary',
         searchable=0,
         required=0,
-        widget=LinesWidget(label=_(u'label_fgvocabulary_text',
-                                   default=u'Options'),
-            description=_(u'help_fgvocabulary_text', default=u"""
+        widget=LinesWidget(label=_('label_fgvocabulary_text',
+                                   default='Options'),
+            description=_('help_fgvocabulary_text', default="""
                 Use one line per option.
                 Note that this may be overridden dynamically.
                 [Note, you may optionally use a "value|label" format.]
@@ -162,9 +162,9 @@ vocabularyOverrideField = \
         validators=('talesvalidator',),
         default='',
         write_permission=EDIT_TALES_PERMISSION,
-        widget=StringWidget(label=_(u'label_fgtvocabulary_text',
-                                    default=u"Options Vocabulary"),
-            description=_(u'help_fgtvocabulary_text', default=u"""
+        widget=StringWidget(label=_('label_fgtvocabulary_text',
+                                    default="Options Vocabulary"),
+            description=_('help_fgtvocabulary_text', default="""
                 A TALES expression that will be evaluated when the form is displayed
                 to get the field options.
                 Leave empty if unneeded.
@@ -180,9 +180,9 @@ vocabularyOverrideField = \
 # only label field uses this without change
 BareFieldSchema = ATContentTypeSchema.copy()
 BareFieldSchema['title'].searchable = False
-BareFieldSchema['title'].widget.label = _(u'label_fieldlabel_text', default=u'Field Label')
+BareFieldSchema['title'].widget.label = _('label_fieldlabel_text', default='Field Label')
 BareFieldSchema['description'].searchable = False
-BareFieldSchema['description'].widget.label = _(u'label_fieldhelp_text', default=u'Field Help')
+BareFieldSchema['description'].widget.label = _('label_fieldhelp_text', default='Field Help')
 BareFieldSchema['description'].widget.description = None
 
 ###
@@ -194,7 +194,7 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             searchable=0,
             required=0,
             widget=BooleanWidget(
-                label=_(u'label_required_text', default=u"Required"),
+                label=_('label_required_text', default="Required"),
                 ),
             ),
         BooleanField('hidden',
@@ -202,7 +202,7 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             required=0,
             write_permission=EDIT_ADVANCED_PERMISSION,
             widget=BooleanWidget(
-                label=_(u'label_hidden_text', default=u"Hidden"),
+                label=_('label_hidden_text', default="Hidden"),
                 ),
             ),
         TALESString('fgTDefault',
@@ -212,9 +212,9 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             validators=('talesvalidator',),
             write_permission=EDIT_TALES_PERMISSION,
             default='',
-            widget=StringWidget(label=_(u'label_fgtdefault_text',
-                                        default=u"Default Expression"),
-                description=_(u'help_fgtdefault_text', default=u"""
+            widget=StringWidget(label=_('label_fgtdefault_text',
+                                        default="Default Expression"),
+                description=_('help_fgtdefault_text', default="""
                     A TALES expression that will be evaluated when the form is displayed
                     to get the field default value.
                     Leave empty if unneeded. Your expression should evaluate as a string.
@@ -232,9 +232,9 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             validators=('talesvalidator',),
             write_permission=EDIT_TALES_PERMISSION,
             default='',
-            widget=StringWidget(label=_(u'label_fgtenable_text', default=u"Enabling Expression"),
-                description=_(u'help_fgtenable_text', default=\
-                    u"A TALES expression that will be evaluated when the form is displayed"
+            widget=StringWidget(label=_('label_fgtenable_text', default="Enabling Expression"),
+                description=_('help_fgtenable_text', default=\
+                    "A TALES expression that will be evaluated when the form is displayed"
                     "to determine whether or not the field is enabled."
                     "Your expression should evaluate as True if"
                     "the field should be included in the form, False if it should be omitted."
@@ -251,9 +251,9 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             write_permission=EDIT_ADVANCED_PERMISSION,
             default='',
             widget=BooleanWidget(
-                label=_(u'label_server_side_text', default=u"Server-Side Variable"),
-                description=_(u'description_server_side_text', default=\
-                    u"Mark this field as a value to be injected into the"
+                label=_('label_server_side_text', default="Server-Side Variable"),
+                description=_('description_server_side_text', default=\
+                    "Mark this field as a value to be injected into the"
                     "request form for use by action adapters and is not"
                     "modifiable by or exposed to the client."),
                 ),
@@ -262,8 +262,8 @@ BaseFieldSchema = BareFieldSchema.copy() + Schema((
             searchable=0,
             required=0,
             widget=StringWidget(
-                label=_(u'label_placeholder', default=u'Placeholder'),
-                description=_(u'help_placeholder', default=u"A placeholder for text input fields."),
+                label=_('label_placeholder', default='Placeholder'),
+                description=_('help_placeholder', default="A placeholder for text input fields."),
             ),
         ),
     ))
@@ -277,8 +277,8 @@ BaseFieldSchemaStringDefault = BaseFieldSchema.copy() + Schema((
         StringField('fgDefault',
             searchable=0,
             required=0,
-            widget=StringWidget(label=_(u'label_fgdefault_text', default=u'Default'),
-            description=_(u'help_fgdefault_text', default=u"The value the field "
+            widget=StringWidget(label=_('label_fgdefault_text', default='Default'),
+            description=_('help_fgdefault_text', default="The value the field "
                 "should contain when the form is first displayed."
                 "Note that this may be overridden dynamically."),
             ),
@@ -294,8 +294,8 @@ BaseFieldSchemaLinesDefault = BaseFieldSchema.copy() + Schema((
         LinesField('fgDefault',
             searchable=0,
             required=0,
-            widget=LinesWidget(label=_(u'label_fglinesdefault_text', default=u'Default'),
-                description=_(u'help_fglinesdefault_text', default=u"""
+            widget=LinesWidget(label=_('label_fglinesdefault_text', default='Default'),
+                description=_('help_fglinesdefault_text', default="""
                     The values the field should contain when the form is first displayed.
                     Use one value per line.
                     Note that this may be overridden dynamically.
@@ -310,8 +310,8 @@ BaseFieldSchemaLinesDefault = BaseFieldSchema.copy() + Schema((
             validators=('talesvalidator',),
             default='',
             write_permission=EDIT_TALES_PERMISSION,
-            widget=StringWidget(label=_(u'label_fgtlinesdefault_text', default=u"Default Expression"),
-                description=_(u'help_fgtlinesdefault_text', default=u"""
+            widget=StringWidget(label=_('label_fgtlinesdefault_text', default="Default Expression"),
+                description=_('help_fgtlinesdefault_text', default="""
                     A TALES expression that will be evaluated when the form is displayed
                     to get the field default value.
                     Leave empty if unneeded. Your expression should evaluate as a list or tuple.
@@ -333,8 +333,8 @@ BaseFieldSchemaTextDefault = BaseFieldSchema.copy() + Schema((
         TextField('fgDefault',
             searchable=0,
             required=0,
-            widget=TextAreaWidget(label=_(u'label_fgtextdefault_text', default=u'Default'),
-                description=_(u'help_fgtextdefault_text', default=u"""
+            widget=TextAreaWidget(label=_('label_fgtextdefault_text', default='Default'),
+                description=_('help_fgtextdefault_text', default="""
                     The text the field should contain when the form is first displayed.
                     Note that this may be overridden dynamically.
                 """),
@@ -349,8 +349,8 @@ BaseFieldSchemaTextDefault = BaseFieldSchema.copy() + Schema((
             validators=('talesvalidator',),
             default='',
             write_permission=EDIT_TALES_PERMISSION,
-            widget=StringWidget(label=_(u'label_fgtdefault_text', default=u"Default Expression"),
-                description=_(u'help_fgtdefault_text', default=u"""
+            widget=StringWidget(label=_('label_fgtdefault_text', default="Default Expression"),
+                description=_('help_fgtdefault_text', default="""
                     A TALES expression that will be evaluated when the form is displayed
                     to get the field default value.
                     Leave empty if unneeded. Your expression should evaluate as a string.
@@ -375,8 +375,8 @@ BaseFieldSchemaRichTextDefault = BaseFieldSchema.copy() + Schema((
             default_content_type='text/html',
             default_output_type='text/x-html-safe',
             allowable_content_types=zconf.ATDocument.allowed_content_types,
-            widget=TinyMCEWidget(label=_(u'label_fgtextdefault_text', default=u'Default'),
-                description=_(u'help_fgtextdefault_text', default=u"""
+            widget=TinyMCEWidget(label=_('label_fgtextdefault_text', default='Default'),
+                description=_('help_fgtextdefault_text', default="""
                     The text the field should contain when the form is first displayed.
                     Note that this may be overridden dynamically.
                 """),
@@ -392,8 +392,8 @@ BaseFieldSchemaRichTextDefault = BaseFieldSchema.copy() + Schema((
             validators=('talesvalidator',),
             default='',
             write_permission=EDIT_TALES_PERMISSION,
-            widget=StringWidget(label=_(u'label_fgtdefault_text', default=u"Default Expression"),
-                description=_(u'help_fgtdefault_text', default=u"""
+            widget=StringWidget(label=_('label_fgtdefault_text', default="Default Expression"),
+                description=_('help_fgtdefault_text', default="""
                     A TALES expression that will be evaluated when the form is displayed
                     to get the field default value.
                     Leave empty if unneeded. Your expression should evaluate as a string.
@@ -515,7 +515,7 @@ class BaseFormField(ATCTContent):
     def __bobo_traverse__(self, REQUEST, name):
         # prevent traversal to attributes we want to protect
         if name in NO_TRAVERSE:
-            print name
+            print(name)
             raise AttributeError
         return super(BaseFormField, self).__bobo_traverse__(REQUEST, name)
 
@@ -592,11 +592,11 @@ class BaseFormField(ATCTContent):
         """ set title of object and field label """
 
         self.title = value
-        if isinstance(value, unicode):
+        if isinstance(value, str):
             uvalue = value
         else:
             charset = 'utf-8'
-            uvalue = unicode(value, charset)
+            uvalue = str(value, charset)
         self.fgField.widget.label = uvalue
 
 
@@ -615,7 +615,7 @@ class BaseFormField(ATCTContent):
             )
 
         if value in badIds:
-            raise BadRequest, 'The id "%s" is reserved.' % value
+            raise BadRequest('The id "%s" is reserved.' % value)
 
         BaseContent.setId(self, value)
         self.fgField.__name__ = self.getId()
@@ -901,12 +901,12 @@ class BaseFormField(ATCTContent):
         # establish a utf-8 baseline. utf-8 not because it's right,
         # but because it will have backword compatability with previous
         # versions.
-        if valueType is unicode:
+        if valueType is str:
             value = value.encode('utf-8')
         elif valueType is type([]):
             a = []
             for item in value:
-                if type(item) is unicode:
+                if type(item) is str:
                     item = item.encode('utf-8')
                 a.append(item)
             value = a

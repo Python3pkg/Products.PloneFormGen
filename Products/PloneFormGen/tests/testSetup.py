@@ -72,7 +72,7 @@ class TestInstallation(pfgtc.PloneFormGenTestCase):
 
     def testSkinLayersInSkinPath(self):
         pfg_layers = self.skins['PloneFormGen']
-        for skin_name, obj in pfg_layers.items():
+        for skin_name, obj in list(pfg_layers.items()):
             self.failUnless('PloneFormGen' in obj.getPhysicalPath())
 
     def testKssRegsitry(self):
@@ -189,10 +189,10 @@ class TestInstallation(pfgtc.PloneFormGenTestCase):
             value = registry[option]
             if isinstance(value, tuple):
                 value = list(value)
-                value.append(u'foo')
+                value.append('foo')
                 value = tuple(value)
             else:
-                value.append(u'foo')
+                value.append('foo')
             registry[option] = value
 
         # reinstall
@@ -202,7 +202,7 @@ class TestInstallation(pfgtc.PloneFormGenTestCase):
         # now make sure our garbage values survived the reinstall
         for option in settings:
             self.failUnless(
-                u'foo' in registry[option],
+                'foo' in registry[option],
                 "Our garbage item didn't survive reinstall for property %s" %
                 option)
 
@@ -546,6 +546,6 @@ class TestGPG(pfgtc.PloneFormGenTestCase):
         from Products.PloneFormGen.content.ya_gpg import gpg, GPGError
 
         if gpg is None:
-            print "\nSkipping GPG tests; gpg binary not found"
+            print("\nSkipping GPG tests; gpg binary not found")
         else:
             self.assertRaises(GPGError, gpg.encrypt, 'spam', 'eggs')

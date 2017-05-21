@@ -36,8 +36,8 @@ FormAdapterSchema = ATContentTypeSchema.copy() + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         read_permission=ModifyPortalContent,
         isMetadata=True,  # just to hide from base view
-        widget=StringWidget(label=_(u'label_execcondition_text', default=u"Execution Condition"),
-            description=_(u'help_execcondition_text', default=u"""
+        widget=StringWidget(label=_('label_execcondition_text', default="Execution Condition"),
+            description=_('help_execcondition_text', default="""
                 A TALES expression that will be evaluated to determine whether or not
                 to execute this action.
                 Leave empty if unneeded, and the action will be executed.

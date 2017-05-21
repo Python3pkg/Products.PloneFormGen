@@ -16,11 +16,11 @@ class IImportSchema(Interface):
     """Schema for form import.
     """
     upload = Bytes(
-        title=_(u'Upload'),
+        title=_('Upload'),
         required=True)
 
     purge = Bool(
-        title=_(u'Remove Existing Form Items?'),
+        title=_('Remove Existing Form Items?'),
         default=False,
         required=False)
 

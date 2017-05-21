@@ -10,7 +10,7 @@ __author__  = 'Mikko Ohtamaa <mikko@redinnovation.com>'
 __docformat__ = 'plaintext'
 
 # Python imorts
-from StringIO import StringIO
+from io import StringIO
 import logging
 
 # Zope imports
@@ -92,8 +92,8 @@ class FormCustomScriptAdapter(FormActionAdapter):
             write_permission=EDIT_PYTHON_PERMISSION,
             vocabulary="getProxyRoleChoices",
             widget=SelectionWidget(
-                label=_(u'label_script_proxy', default=u'Proxy role'),
-                description=_(u'help_script_proxy', default=u""" Role under which to run the script. """),
+                label=_('label_script_proxy', default='Proxy role'),
+                description=_('help_script_proxy', default=""" Role under which to run the script. """),
                 ),
             ),
 
@@ -104,10 +104,10 @@ class FormCustomScriptAdapter(FormActionAdapter):
             read_permission=ModifyPortalContent,
             write_permission=EDIT_PYTHON_PERMISSION,
             widget=TextAreaWidget(
-                label=_(u'label_script_body', default=u'Script body'),
+                label=_('label_script_body', default='Script body'),
                 rows=10,
                 visible={'view': 'invisible', 'edit': 'visible'},
-                description=_(u'help_script_body', default=u""" Write your script here. """),
+                description=_('help_script_body', default=""" Write your script here. """),
                 ),
             ),
     ))

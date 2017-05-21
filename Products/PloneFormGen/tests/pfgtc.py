@@ -17,7 +17,7 @@ try:
     haveRecaptcha = True
 except ImportError:
     haveRecaptcha = False
-    print "collective.recaptcha is unavailable: captcha tests will be skipped."
+    print("collective.recaptcha is unavailable: captcha tests will be skipped.")
 
 from Products.Five.testbrowser import Browser
 from Products.MailHost.MailHost import MailHost
@@ -30,7 +30,7 @@ class Session(dict):
 
 class MailHostMock(MailHost):
     def _send(self, mfrom, mto, messageText, immediate=False):
-        print '<sent mail from %s to %s>' % (mfrom, mto)
+        print('<sent mail from %s to %s>' % (mfrom, mto))
         self.msgtext = messageText
         self.msg = email.message_from_string(messageText.lstrip())
 

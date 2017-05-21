@@ -1,1 +1,1 @@
-import formGenTool
+from . import formGenTool

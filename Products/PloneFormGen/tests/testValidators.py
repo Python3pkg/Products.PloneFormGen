@@ -97,11 +97,11 @@ class TestCustomValidatorMessages(pfgtc.PloneFormGenTestCase):
         # self.failUnlessEqual(validationMessages.cleanupMessage(s, self, self), u'pfg_isUnixLikeName')
 
         s = "Something is required, please correct."
-        self.failUnlessEqual(validationMessages.cleanupMessage(s, self, self), u'pfg_isRequired')
+        self.failUnlessEqual(validationMessages.cleanupMessage(s, self, self), 'pfg_isRequired')
 
         s = "Validation failed(isNotTooLong): 'something' is too long. Must be no longer than some characters."
         response = validationMessages.cleanupMessage(s, self, self)
-        self.failUnlessEqual(response, u'pfg_too_long')
+        self.failUnlessEqual(response, 'pfg_too_long')
 
 
     def test_stringValidators(self):

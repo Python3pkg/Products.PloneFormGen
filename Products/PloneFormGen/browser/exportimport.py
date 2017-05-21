@@ -45,7 +45,7 @@ class FormFolderImportView(formbase.Form):
     status = errors = None
     prefix = 'form'
 
-    @form.action(_(u"import"))
+    @form.action(_("import"))
     def action_import(self, action, data):
         if data.get('purge', False) == True:
             # user has requested removal of existing fields
@@ -54,7 +54,7 @@ class FormFolderImportView(formbase.Form):
         ctx = TarballImportContext(self.context, data['upload'])
         IFilesystemImporter(self.context).import_(ctx, 'structure', True)
 
-        message = _(u'Form imported.')
+        message = _('Form imported.')
         IStatusMessage(self.request).addStatusMessage(message, type='info')
 
         url = getMultiAdapter((self.context, self.request), name='absolute_url')()

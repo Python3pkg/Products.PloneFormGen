@@ -93,7 +93,7 @@ class gpg_subprocess:
 
         PIPE = subprocess.PIPE
         cmd = '%s --batch --yes --trust-model always --no-secmem-warning --encrypt -a -r %s' % (self.gpg_binary, recipient_key_id)
-        if isinstance(cmd, unicode):
+        if isinstance(cmd, str):
             cmd = cmd.encode('utf-8')
         cmd = shlex.split(cmd)
         p = subprocess.Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=False)
@@ -121,9 +121,9 @@ except IOError:
 
 if __name__ == '__main__':
     if gpg:
-        print "Testing ya_gpg"
+        print("Testing ya_gpg")
         # we expect an exception if recipient is not in public keyring
         data = gpg.encrypt('BLABLA', 'steve@...')
-        print data
+        print(data)
     else:
-        print "gpg not available"
+        print("gpg not available")

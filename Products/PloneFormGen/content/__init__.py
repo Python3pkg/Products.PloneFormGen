@@ -4,8 +4,8 @@
     Used by PloneFormGen/__init__.py
 
 """
-import fields, form, fieldset
-import actionAdapter, saveDataAdapter, formMailerAdapter
-import customScriptAdapter
-import thanksPage
-import likertField, formLikertField
+from . import fields, form, fieldset
+from . import actionAdapter, saveDataAdapter, formMailerAdapter
+from . import customScriptAdapter
+from . import thanksPage
+from . import likertField, formLikertField

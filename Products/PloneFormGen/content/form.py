@@ -45,7 +45,7 @@ from Products.PloneFormGen import PloneFormGenMessageFactory as _
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
-import field_utils
+from . import field_utils
 
 from types import StringTypes
 
@@ -59,8 +59,8 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         searchable=0,
         default="Submit",
         widget=StringWidget(
-            label=_(u'label_submitlabel_text', default=u"Submit Button Label"),
-            description = _(u'help_submitlabel_text', default=u""),
+            label=_('label_submitlabel_text', default="Submit Button Label"),
+            description = _('help_submitlabel_text', default=""),
             ),
         ),
     BooleanField('useCancelButton',
@@ -68,9 +68,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         searchable=0,
         default='0',
         languageIndependent=1,
-        widget=BooleanWidget(label=_(u'label_showcancel_text',
-                                     default=u'Show Reset Button'),
-            description=_(u'help_showcancel_text', default=u""),
+        widget=BooleanWidget(label=_('label_showcancel_text',
+                                     default='Show Reset Button'),
+            description=_('help_showcancel_text', default=""),
             ),
         ),
     StringField('resetLabel',
@@ -78,14 +78,14 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         searchable=0,
         default="Reset",
         widget=StringWidget(
-                label=_(u'label_reset_button', default=u"Reset Button Label"),
+                label=_('label_reset_button', default="Reset Button Label"),
                 ),
         ),
     LinesField('actionAdapter',
         vocabulary='actionAdaptersDL',
         widget=MultiSelectionWidget(
-            label=_(u'label_actionadapter_text', default=u"Action Adapter"),
-            description=_(u'help_actionadapter_text', default=u"""
+            label=_('label_actionadapter_text', default="Action Adapter"),
+            description=_('help_actionadapter_text', default="""
                 To make your form do something useful when submitted:
                 add one or more form action adapters to the form folder,
                 configure them, then return to this
@@ -99,8 +99,8 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         required=False,
         vocabulary='thanksPageVocabulary',
         widget=SelectionWidget(
-            label=_(u'label_thankspage_text', default=u'Thanks Page'),
-            description=_(u'help_thankspage_text', default=u"""
+            label=_('label_thankspage_text', default='Thanks Page'),
+            description=_('help_thankspage_text', default="""
                 Pick a contained page you wish to show on a successful
                 form submit. (If none are available, add one.)
                 Choose none to simply display the form
@@ -113,8 +113,8 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         default=False,
         # write_permission=EDIT_ADVANCED_PERMISSION,
         widget=BooleanWidget(
-            label=_(u'label_force_ssl', default=u'Force SSL connection'),
-            description=_(u'help_force_ssl', default=u"""
+            label=_('label_force_ssl', default='Force SSL connection'),
+            description=_('help_force_ssl', default="""
                 Check this to make the form redirect to an SSL-enabled
                 version of itself (https://) if accessed via a non-SSL
                 URL (http://).  In order to function properly,
@@ -135,9 +135,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         default_output_type = 'text/x-html-safe',
         allowable_content_types = zconf.ATDocument.allowed_content_types,
         widget = TinyMCEWidget(
-            label = _(u'label_prologue_text', default=u"Form Prologue"),
-            description = _(u'help_prologue_text',
-                default=u"This text will be displayed above the form fields."),
+            label = _('label_prologue_text', default="Form Prologue"),
+            description = _('help_prologue_text',
+                default="This text will be displayed above the form fields."),
             rows = 8,
             allow_file_upload = zconf.ATDocument.allow_document_upload,
             ),
@@ -154,9 +154,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         default_output_type = 'text/x-html-safe',
         allowable_content_types = zconf.ATDocument.allowed_content_types,
         widget = TinyMCEWidget(
-            label = _(u'label_epilogue_text', default=u"Form Epilogue"),
-            description = _(u'help_epilogue_text',
-                default=u"The text will be displayed after the form fields."),
+            label = _('label_epilogue_text', default="Form Epilogue"),
+            description = _('help_epilogue_text',
+                default="The text will be displayed after the form fields."),
             rows = 8,
             allow_file_upload = zconf.ATDocument.allow_document_upload,
             ),
@@ -167,9 +167,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         required=0,
         languageIndependent=1,
         write_permission=EDIT_TALES_PERMISSION,
-        widget=StringWidget(label=_(u'label_thankspageoverride_text',
-                                    default=u"Custom Success Action"),
-            description=_(u'help_thankspageoverride_text', default=u"""
+        widget=StringWidget(label=_('label_thankspageoverride_text',
+                                    default="Custom Success Action"),
+            description=_('help_thankspageoverride_text', default="""
                 Use this field in place of a thanks-page designation
                 to determine final action after calling
                 your action adapter (if you have one). You would usually use
@@ -191,8 +191,8 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         required=0,
         write_permission=EDIT_ADVANCED_PERMISSION,
         languageIndependent=1,
-        widget=StringWidget(label=_(u'label_formactionoverride_text', default=u"Custom Form Action"),
-            description=_(u'help_formactionoverride_text', default=u"""
+        widget=StringWidget(label=_('label_formactionoverride_text', default="Custom Form Action"),
+            description=_('help_formactionoverride_text', default="""
                 Use this field to override the form action attribute.
                 Specify a URL to which the form will post.
                 This will bypass form validation, success action
@@ -209,9 +209,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         default='',
         languageIndependent=1,
-        widget=StringWidget(label=_(u'label_OnDisplayOverride_text',
-                                    default=u"Form Setup Script"),
-            description=_(u'help_OnDisplayOverride_text', default=u"""
+        widget=StringWidget(label=_('label_OnDisplayOverride_text',
+                                    default="Form Setup Script"),
+            description=_('help_OnDisplayOverride_text', default="""
                 A TALES expression that will be called when the form is
                 displayed.
                 Leave empty if unneeded.
@@ -233,10 +233,10 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         default='',
         languageIndependent=1,
-        widget=StringWidget(label=_(u'label_AfterValidationOverride_text',
-                                    default=u"After Validation Script"),
-            description=_(u'help_AfterValidationOverride_text', default=\
-                u"A TALES expression that will be called after the form is"
+        widget=StringWidget(label=_('label_AfterValidationOverride_text',
+                                    default="After Validation Script"),
+            description=_('help_AfterValidationOverride_text', default=\
+                "A TALES expression that will be called after the form is"
                 "successfully validated, but before calling an action adapter"
                 "(if any) or displaying a thanks page."
                 "Form input will be in the request.form dictionary."
@@ -257,9 +257,9 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         write_permission=EDIT_TALES_PERMISSION,
         default='',
         languageIndependent=1,
-        widget=StringWidget(label=_(u'label_headerInjection_text',
-                                    default=u"Header Injection"),
-            description=_(u'help_headerInjection_text', default=u"""
+        widget=StringWidget(label=_('label_headerInjection_text',
+                                    default="Header Injection"),
+            description=_('help_headerInjection_text', default="""
                 This override field allows you to insert content into the xhtml
                 head. The typical use is to add custom CSS or JavaScript.
                 Specify a TALES expression returning a string. The string will
@@ -276,8 +276,8 @@ FormFolderSchema = ATFolderSchema.copy() + Schema((
         schemata='overrides',
         write_permission=EDIT_ADVANCED_PERMISSION,
         widget=BooleanWidget(
-            label=_(u'label_csrf', default=u'CSRF Protection'),
-            description=_(u'help_csrf', default=u"""
+            label=_('label_csrf', default='CSRF Protection'),
+            description=_('help_csrf', default="""
                 Check this to employ Cross-Site Request Forgery protection.
                 Note that only HTTP Post actions will be allowed.
             """),
@@ -740,12 +740,12 @@ class FormFolder(ATFolder):
 
         myFields = []
         if withNone:
-            myFields.append((noneValue, _(u'vocabulary_none_text', u'None')))
+            myFields.append((noneValue, _('vocabulary_none_text', 'None')))
 
         for obj in self._getFieldObjects(objTypes):
             if obj.getServerSide() or obj.isLabel():
                 continue
-            if isinstance(obj.title, unicode):
+            if isinstance(obj.title, str):
                 myFields.append((obj.getId(), obj.title))
             else:
                 myFields.append((obj.getId(),
@@ -761,7 +761,7 @@ class FormFolder(ATFolder):
 
         registry = getUtility(IRegistry)
         defaultPageTypes = registry['plone.default_page_types']
-        tpages = [('', _(u'vocabulary_none_text', u'None')), ]
+        tpages = [('', _('vocabulary_none_text', 'None')), ]
 
         for obj in self.objectValues():
             if IPloneFormGenThanksPage.providedBy(obj) or \
@@ -831,8 +831,8 @@ class FormFolder(ATFolder):
 
         ATFolder.initializeArchetype(self, **kwargs)
 
-        self.setSubmitLabel(zope.i18n.translate(_(u'pfg_formfolder_submit', u'Submit'), context=self.REQUEST))
-        self.setResetLabel(zope.i18n.translate(_(u'pfg_formfolder_reset', u'Reset'), context=self.REQUEST))
+        self.setSubmitLabel(zope.i18n.translate(_('pfg_formfolder_submit', 'Submit'), context=self.REQUEST))
+        self.setResetLabel(zope.i18n.translate(_('pfg_formfolder_reset', 'Reset'), context=self.REQUEST))
 
         oids = self.objectIds()
 
@@ -847,12 +847,12 @@ class FormFolder(ATFolder):
                 mailer = self['mailer']
 
                 mailer.setTitle(zope.i18n.translate(
-                  _(u'pfg_mailer_title', u'Mailer'),
+                  _('pfg_mailer_title', 'Mailer'),
                   context=self.REQUEST))
                 mailer.setDescription(
                   zope.i18n.translate(
-                    _(u'pfg_mailer_description',
-                      u'E-Mails Form Input'),
+                    _('pfg_mailer_description',
+                      'E-Mails Form Input'),
                     context=self.REQUEST))
 
                 self._pfFixup(mailer)
@@ -868,7 +868,7 @@ class FormFolder(ATFolder):
             obj.fgField.__name__ = 'replyto'
 
             obj.setTitle(zope.i18n.translate(
-              _(u'pfg_replytofield_title', u'Your E-Mail Address'),
+              _('pfg_replytofield_title', 'Your E-Mail Address'),
               context=self.REQUEST))
 
             obj.fgField.required = True
@@ -887,7 +887,7 @@ class FormFolder(ATFolder):
             obj.fgField.__name__ = 'topic'
 
             obj.setTitle(zope.i18n.translate(
-              _(u'pfg_topicfield_title', u'Subject'),
+              _('pfg_topicfield_title', 'Subject'),
               context=self.REQUEST))
 
             obj.fgField.required = True
@@ -903,7 +903,7 @@ class FormFolder(ATFolder):
             obj.fgField.__name__ = 'comments'
 
             obj.setTitle(zope.i18n.translate(
-              _(u'pfg_commentsfield_title', u'Comments'),
+              _('pfg_commentsfield_title', 'Comments'),
               context=self.REQUEST))
 
             obj.fgField.required = True
@@ -916,9 +916,9 @@ class FormFolder(ATFolder):
             obj = self['thank-you']
 
             obj.setTitle(zope.i18n.translate(
-              _(u'pfg_thankyou_title', u'Thank You'), context=self.REQUEST))
+              _('pfg_thankyou_title', 'Thank You'), context=self.REQUEST))
             obj.setDescription(zope.i18n.translate(
-              _(u'pfg_thankyou_description', u'Thanks for your input.'),
+              _('pfg_thankyou_description', 'Thanks for your input.'),
               context=self.REQUEST))
 
             self._pfFixup(obj)

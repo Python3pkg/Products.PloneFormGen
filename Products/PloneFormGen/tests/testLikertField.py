@@ -52,7 +52,7 @@ class TestLikertField(pfgtc.PloneFormGenTestCase):
         # try it with no input, required
         self.lf.setRequired(True)
         errors = self.ff1.fgvalidate(REQUEST=request)
-        self.assertEqual( errors, {'lf': u'pfg_allRequired'} )
+        self.assertEqual( errors, {'lf': 'pfg_allRequired'} )
 
         # try it with input, required
         request = FakeRequest(topic = 'test subject',

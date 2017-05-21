@@ -1,1 +1,1 @@
-import ExRangeValidator, MaxLengthValidator, BooleanValidators, TextValidators, CaptchaValidator
+from . import ExRangeValidator, MaxLengthValidator, BooleanValidators, TextValidators, CaptchaValidator

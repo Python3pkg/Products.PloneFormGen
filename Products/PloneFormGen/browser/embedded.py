@@ -18,7 +18,7 @@ class EmbeddedPFGView(BrowserView):
 
     # Prefix to ensure that we don't try to process other forms that might
     # be on the same page
-    prefix = u''
+    prefix = ''
 
     # optional form action override
     action = None

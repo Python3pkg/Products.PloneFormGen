@@ -1,4 +1,4 @@
-from urllib import quote_plus
+from urllib.parse import quote_plus
 
 from zope.interface import alsoProvides
 from Products.Five import BrowserView
@@ -78,8 +78,8 @@ class QuickEditView(BrowserView):
     def addableFieldsets(self):
         """ Return a list of fieldset markers """
         return (
-            {'id':'FieldsetStart','title':_(u'Fieldset Start'),'description':_(u'Begin a fieldset')},
-            {'id':'FieldsetEnd','title':_(u'Fieldset End'),'description':_(u'End a fieldset')},
+            {'id':'FieldsetStart','title':_('Fieldset Start'),'description':_('Begin a fieldset')},
+            {'id':'FieldsetEnd','title':_('Fieldset End'),'description':_('End a fieldset')},
         )
 
 
@@ -97,7 +97,7 @@ class QuickEditView(BrowserView):
         """ icon extension for this version """
 
         if HAVE_43:
-            return u"png"
+            return "png"
         else:
-            return u"gif"
+            return "gif"
 

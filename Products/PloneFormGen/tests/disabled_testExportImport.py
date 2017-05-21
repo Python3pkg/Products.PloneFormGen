@@ -7,7 +7,7 @@ from tarfile import TarFile
 from ZPublisher.HTTPRequest import FileUpload
 from cgi import FieldStorage
 
-from StringIO import StringIO
+from io import StringIO
 
 from zope.component import getMultiAdapter
 
@@ -127,7 +127,7 @@ class ExportImportTester(pfgtc.PloneFormGenTestCase, TarballTester):
             # 'submitLabel':'Hit Me',
         }
 
-        for k,v in form_values.items():
+        for k,v in list(form_values.items()):
             self.assertEqual(v, self._extractFieldValue(form_ctx[k]),
                 "Expected '%s' for field %s, Got '%s'" % (v, k, form_ctx[k]))
 
@@ -190,7 +190,7 @@ class ExportImportTester(pfgtc.PloneFormGenTestCase, TarballTester):
             self.failUnless('%s' % form_field['id'] in form_ctx.objectIds())
             sub_form_item = form_ctx[form_field['id']]
             # make sure all the standard callables are set
-            for k,v in form_field.items():
+            for k,v in list(form_field.items()):
                 if k == 'subfields':
                     self._verifyProfileForm(sub_form_item, v)
                 else:
@@ -232,7 +232,7 @@ class TestFormExport(ExportImportTester):
 
         # make sure our field and adapters are objects
         for id, object in self.ff1.objectItems():
-            self.failUnless(form_export_data.has_key(self.file_tmpl % id),
+            self.failUnless(self.file_tmpl % id in form_export_data,
                     "No export representation of %s" % id)
             self.failUnless(self.title_output_tmpl % object.Title() in \
                     form_export_data[self.file_tmpl % id])
@@ -362,7 +362,7 @@ class TestFormImport(ExportImportTester):
         # submit the form requesting purge of contained fields
         request = self.app.REQUEST
         request.form={
-            'form.purge':u'on',
+            'form.purge':'on',
             'form.upload':self._prepareFormTarball(),
             'form.actions.import':'import'}
         request.RESPONSE = self.app.REQUEST.response

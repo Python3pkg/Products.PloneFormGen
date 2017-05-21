@@ -9,7 +9,7 @@ try:
 except ImportError:
     has_xls = False
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from AccessControl import ClassSecurityInfo
 
@@ -43,7 +43,7 @@ import time
 
 from DateTime import DateTime
 import csv
-from StringIO import StringIO
+from io import StringIO
 from types import StringTypes
 
 logger = logging.getLogger("PloneFormGen")
@@ -61,8 +61,8 @@ class FormSaveDataAdapter(FormActionAdapter):
             searchable=0,
             vocabulary='allFieldDisplayList',
             widget=PicklistWidget(
-                label=_(u'label_savefields_text', default=u"Saved Fields"),
-                description=_(u'help_savefields_text', default=u"""
+                label=_('label_savefields_text', default="Saved Fields"),
+                description=_('help_savefields_text', default="""
                     Pick the fields whose inputs you'd like to include in
                     the saved data. If empty, all fields will be saved.
                     """),
@@ -70,8 +70,8 @@ class FormSaveDataAdapter(FormActionAdapter):
             ),
         LinesField('ExtraData',
             widget=MultiSelectionWidget(
-                label=_(u'label_savedataextra_text', default='Extra Data'),
-                description=_(u'help_savedataextra_text', default=u"""
+                label=_('label_savedataextra_text', default='Extra Data'),
+                description=_('help_savedataextra_text', default="""
                     Pick any extra data you'd like saved with the form input.
                     """),
                 format='checkbox',
@@ -84,15 +84,15 @@ class FormSaveDataAdapter(FormActionAdapter):
             default='csv',
             vocabulary='vocabFormatDL',
             widget=SelectionWidget(
-                label=_(u'label_downloadformat_text', default=u'Download Format'),
+                label=_('label_downloadformat_text', default='Download Format'),
                 ),
             ),
         BooleanField("UseColumnNames",
             required=False,
             searchable=False,
             widget=BooleanWidget(
-                label=_(u'label_usecolumnnames_text', default=u"Include Column Names"),
-                description=_(u'help_usecolumnnames_text', default=u"Do you wish to have column names on the first line of downloaded input?"),
+                label=_('label_usecolumnnames_text', default="Include Column Names"),
+                description=_('help_usecolumnnames_text', default="Do you wish to have column names on the first line of downloaded input?"),
                 ),
             ),
         ExLinesField('SavedFormInput',
@@ -104,8 +104,8 @@ class FormSaveDataAdapter(FormActionAdapter):
             schemata="saved data",
             read_permission=DOWNLOAD_SAVED_PERMISSION,
             widget=TextAreaWidget(
-                label=_(u'label_savedatainput_text', default=u"Saved Form Input"),
-                description=_(u'help_savedatainput_text'),
+                label=_('label_savedatainput_text', default="Saved Form Input"),
+                description=_('help_savedatainput_text'),
                 ),
             ),
     ))
@@ -160,7 +160,7 @@ class FormSaveDataAdapter(FormActionAdapter):
         """
 
         if base_hasattr(self, '_inputStorage'):
-            return self._inputStorage.values()
+            return list(self._inputStorage.values())
         else:
             return self.SavedFormInput
 
@@ -171,7 +171,7 @@ class FormSaveDataAdapter(FormActionAdapter):
             each row is an (id, sequence of fields) tuple
         """
         if base_hasattr(self, '_inputStorage'):
-            return self._inputStorage.items()
+            return list(self._inputStorage.items())
         else:
             return enumerate(self.SavedFormInput)
 
@@ -411,7 +411,7 @@ class FormSaveDataAdapter(FormActionAdapter):
 
         if getattr(self, 'UseColumnNames', False):
             res = "%s\n" % '\t'.join(self.getColumnNames(excludeServerSide=False))
-            if isinstance(res, unicode):
+            if isinstance(res, str):
                 res = res.encode(self.getCharset())
         else:
             res = ''
@@ -437,7 +437,7 @@ class FormSaveDataAdapter(FormActionAdapter):
         if getattr(self, 'UseColumnNames', False):
             delimiter = self.csvDelimiter()
             res = "%s\n" % delimiter.join(self.getColumnNames(excludeServerSide=False))
-            if isinstance(res, unicode):
+            if isinstance(res, str):
                 res = res.encode(self.getCharset())
         else:
             res = ''
@@ -468,7 +468,7 @@ class FormSaveDataAdapter(FormActionAdapter):
 
         for row in self.getSavedFormInput():
             for col_num, col in enumerate(row):
-                if type(col) is unicode:
+                if type(col) is str:
                     col = col.encode(self.getCharset())
 
                 if urlparse(col).scheme in ('http', 'https'):

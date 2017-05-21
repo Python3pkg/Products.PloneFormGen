@@ -203,7 +203,7 @@ class TestCustomScript(pfgtc.PloneFormGenTestCase):
         throwed = False
         try:
             reply = adapter.onSuccess([])
-        except TypeError, e:
+        except TypeError as e:
             reply = None
             throwed = True
 
@@ -228,7 +228,7 @@ class TestCustomScript(pfgtc.PloneFormGenTestCase):
         throwed = False
         try:
             adapter.onSuccess([])
-        except ValueError, e:
+        except ValueError as e:
             throwed = True
 
         assert throwed, "Bad script didn't throw run-time exception"
